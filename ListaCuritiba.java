@@ -38,28 +38,29 @@ public class ListaCuritiba {
         for (String nome : nomes) {
             char primeiraLetra = Character.toUpperCase(nome.charAt(0));
             if (!Character.isAlphabetic(primeiraLetra)) {
-                continue; // Ignora nomes que não começam com uma letra
+                continue; // ignora letras sem um nome
             }
 
             bairrosPorLetra.putIfAbsent(primeiraLetra, new ArrayList<>());
             List<String> nomesDaLetra = bairrosPorLetra.get(primeiraLetra);
 
+            //limite de 16 no arraylist ja q é o numero maximo de nomes em um grupo
             if (nomesDaLetra.size() < 16) {
-                nomesDaLetra.add(nome);
+                nomesDaLetra.add(nome); 
             }
         }
 
-        // Ordenando os nomes dentro de cada grupo
+        // ordenando
         for (List<String> nomesDaLetra : bairrosPorLetra.values()) {
             Collections.sort(nomesDaLetra);
         }
 
-        // Solicitando a letra ao usuário
+        // pede letra
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite uma letra (A-Z): ");
         char letra = Character.toUpperCase(scanner.next().charAt(0));
 
-        // Exibindo a lista de nomes para a letra solicitada
+        // exibe a lista
         List<String> nomesDaLetra = bairrosPorLetra.get(letra);
         if (nomesDaLetra != null) {
             System.out.println("Nomes que começam com a letra " + letra + ":");
